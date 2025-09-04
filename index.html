@@ -3,16 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Israel Hayom – Mockup</title>
+  <title>Israel news | Israel Hayom - www.israelhayom.com</title>
+  <link rel="icon" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#ffffff;--ink:#111;--muted:#666;--line:#e7e7e7;--accent:#d62828;
-    }
+    :root{ --bg:#ffffff; --ink:#111; --muted:#666; --line:#e7e7e7; --accent:#d62828; }
     *{box-sizing:border-box}
-    body{margin:0;font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;color:var(--ink);background:var(--bg)}
+    body{margin:0;font:16px/1.6 'Merriweather', Georgia, 'Times New Roman', serif;color:var(--ink);background:var(--bg)}
     a{color:inherit;text-decoration:none}
-    /* Widen page and reduce side gutters so side columns sit near edges */
-    .container{max-width:1360px;margin:0 auto;padding:0 12px}
+    /* Wider outer margins */
+    .container{max-width:1200px;margin:0 auto;padding:0 28px}
 
     /* Top utility bar */
     .topbar{border-bottom:1px solid var(--line);font-size:14px}
@@ -24,26 +26,40 @@
 
     /* Masthead */
     .masthead{padding:10px 0;border-bottom:1px solid var(--line)}
-    .masthead .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+    .masthead .wrap{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px}
     .newsletter-btn{justify-self:start;background:#111;color:#fff;padding:10px 16px;border-radius:6px;font-weight:800;letter-spacing:.03em}
-    .logo{display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .logo{display:flex;flex-direction:column;align-items:center;justify-content:center;justify-self:center}
     .logo-img{max-width:520px;height:auto}
-    .logo small{display:block;text-align:center;margin-top:4px;color:var(--muted)}
 
-    /* Login mini form (in masthead) */
-    .login-box{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-    .login-box input{padding:6px 8px;border:1px solid var(--line);border-radius:4px;min-width:150px}
-    .login-box button{padding:6px 10px;background:var(--ink);color:#fff;border:0;border-radius:4px;cursor:pointer}
+    /* Login area */
+    .login-box{display:grid;grid-template-columns:1fr auto;grid-auto-rows:auto;column-gap:6px;row-gap:6px;justify-content:start;width:260px;margin-left:auto;align-self:center}
+    .login-box input{padding:6px 8px;border:1px solid var(--line);border-radius:4px;width:100%}
+    .login-box .user{grid-column:1 / -1}
+    .login-box .pass{grid-column:1}
+    .login-box .login-btn{grid-column:2;align-self:end;margin-left:6px;padding:6px 10px;background:var(--ink);color:#fff;border:0;border-radius:4px;cursor:pointer}
+    .mast-actions{display:none;gap:10px;align-items:center;justify-content:flex-end}
+    .login-cta{display:none;padding:6px 10px;border:1px solid var(--ink);background:#fff;border-radius:6px;font-weight:700}
+    .mast-spacer{display:none}
 
-    /* Nav – center row but stretch tabs across full width between left rail & right images */
+    /* Burger (mobile) */
+    .burger-left{width:24px;height:18px;position:relative;display:none}
+    .burger-left span{position:absolute;left:0;right:0;height:2px;background:#333}
+    .burger-left span:nth-child(1){top:0}
+    .burger-left span:nth-child(2){top:8px}
+    .burger-left span:nth-child(3){bottom:0}
+
+    /* Nav – stretch tabs across width */
     nav{border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:5}
     .nav{display:flex;align-items:center;gap:16px;padding:12px 0}
     .tabs{display:flex;flex:1;justify-content:space-between;align-items:center}
-    .tabs a{font-weight:600;white-space:nowrap}
+    .tabs a{font-weight:700;white-space:nowrap}
     .nav .search{margin-left:16px;font-weight:700}
 
-    /* Main grid – make right column ≈ quarter of the center column */
-    .grid{display:grid;grid-template-columns:300px 1fr 205px;gap:28px;margin-top:22px}
+    /* Main grid with named areas */
+    .grid{display:grid;grid-template-columns:minmax(240px,26%) 1fr var(--right-col-w, minmax(160px,22%));gap:clamp(20px,3vw,32px);margin-top:22px;grid-template-areas:"rail feature right"}
+    .rail{grid-area:rail}
+    .feature{grid-area:feature;text-align:center}
+    .right{grid-area:right}
 
     /* Left rail */
     .rail article{padding:14px 0;border-bottom:1px solid var(--line)}
@@ -52,30 +68,56 @@
     .by{font-size:12px;color:var(--muted)}
 
     /* Feature */
-    .feature{ text-align:center; }
     .feature figure{margin:0}
-    .feature img{width:100%;height:auto;border-radius:4px}
+    .feature-img{width:100%;height:auto;border-radius:4px}
     .kicker{display:inline-block;background:#efeded;border:1px solid var(--line);font-size:11px;padding:4px 8px;border-radius:20px;margin:8px 0 0;color:#333}
     .feature h2{margin:12px 0 10px;font-size:28px;line-height:1.2}
     .meta{font-size:12px;color:var(--muted)}
     .excerpt{margin:8px 0 14px;color:#333}
     .btn{display:inline-block;background:var(--ink);color:#fff;padding:10px 14px;border-radius:6px;font-weight:700}
-    .btn.outline{background:#fff;color:var(--ink);border:1px solid var(--ink)}
 
-    /* Right rail – smaller cards */
+    /* Right rail */
     .card{display:block;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:14px}
-    .card img{width:100%;height:auto;border-radius:4px}
+    .card img{border-radius:4px;display:block;margin:0 auto}
     .card h5{margin:8px 0 6px;font-size:15px}
 
-    /* Footer-ish spacing */
     .sp{height:40px}
 
+    /* Mobile-only login row (hidden by default) */
+    .mobile-login-row{display:none}
+
     /* Responsive */
+    @media (min-width:769px){
+      .mast-actions{display:none}
+      /* images keep aspect: height = 1/2 of feature, width auto */
+      .right .card img{height:var(--side-h); width:auto; max-width:100%; object-fit:contain}
+    }
+
     @media (max-width:1100px){
-      .grid{grid-template-columns:1fr}
-      .rail{order:2}
-      .right{order:3}
-      .tabs{gap:18px;justify-content:center;flex-wrap:wrap}
+      .container{padding:0 16px}
+    }
+
+    @media (max-width:900px){
+      /* Hide utility items; restructure masthead */
+      .topbar{display:none}
+      nav{display:none}
+      .newsletter-btn{display:none}
+      .login-box{display:none}
+      .mast-actions{display:none !important}
+      .masthead .wrap{grid-template-columns:40px 1fr 40px;align-items:center}
+      .burger-left{display:block}
+      .center{grid-column:2;justify-self:center}
+      .mast-spacer{display:block;width:40px;height:18px}
+      /* Keep logo perfectly centered and NOT clipped */
+      .logo-img{max-width:clamp(160px, 48vw, 260px);height:auto;margin:0 auto}
+
+      /* Stack content in order: feature -> rail -> right */
+      .grid{grid-template-columns:1fr;gap:18px;grid-template-areas:"feature" "rail" "right"}
+      .feature-img{width:100%}
+
+      /* Mobile login row shown */
+      .mobile-login-row{display:flex;justify-content:center;padding:8px 0}
+      .mobile-login-row .login-cta{display:inline-block}
     }
   </style>
 </head>
@@ -98,20 +140,23 @@
     <div class="container wrap">
       <div class="left">
         <a class="newsletter-btn" href="#">✉️ NEWSLETTER</a>
+        <div class="burger-left" aria-label="Menu" role="img"><span></span><span></span><span></span></div>
       </div>
       <div class="center logo">
         <img class="logo-img" src="logo.svg" alt="Israel Hayom logo" onerror="this.onerror=null;this.src='https://placehold.co/320x70?text=Logo'">
-        <small>This is where we stand</small>
-      </div>
+        </div>
       <div class="right">
         <form class="login-box" onsubmit="return false;">
-          <input type="text" placeholder="Username" aria-label="Username" />
-          <input type="password" placeholder="Password" aria-label="Password" />
-          <button>Log in</button>
+          <input class="user" type="text" placeholder="Username" aria-label="Username" />
+          <input class="pass" type="password" placeholder="Password" aria-label="Password" />
+          <button class="login-btn">Log in</button>
         </form>
+        <div class="mast-spacer" aria-hidden="true"></div>
       </div>
     </div>
   </div>
+  <div class="mobile-login-row container">
+    <button class="login-cta">Log in</button>
   </div>
 
   <nav>
@@ -157,7 +202,7 @@
     <!-- Center feature -->
     <section class="feature">
       <figure>
-        <img src="center_image.png" alt="Feature image" onerror="this.onerror=null;this.src='https://placehold.co/820x520?text=Feature+Image'" />
+        <img class="feature-img" src="center_image.png" alt="Feature image" onerror="this.onerror=null;this.src='https://placehold.co/820x520?text=Feature+Image'" />
       </figure>
       <div class="kicker">HOSTAGE DEAL</div>
       <h2>Hamas: Ready for a comprehensive deal to end the war</h2>
@@ -189,5 +234,54 @@
   </main>
 
   <div class="sp"></div>
+  <script>
+    // Sync right-rail image height to half of the center feature image height,
+    // and scale widths proportionally (keeping aspect ratio). Also adjust right column width.
+    (function(){
+      function computeSideDims(){
+        const feat = document.querySelector('.feature-img');
+        if(!feat) return;
+        const h = feat.getBoundingClientRect().height;
+        if(h>0){
+          document.documentElement.style.setProperty('--side-h', (h/2)+'px');
+        }
+        const sideImgs = Array.from(document.querySelectorAll('.right .card img'));
+        let maxW = 0;
+        sideImgs.forEach(img => {
+          const nh = img.naturalHeight || 0;
+          const nw = img.naturalWidth || 0;
+          if(nh>0 && nw>0){
+            const targetH = h/2;
+            const targetW = (nw/nh) * targetH; // keep aspect
+            if(targetW > maxW) maxW = targetW;
+            img.style.height = targetH + 'px';
+            img.style.width = 'auto';
+            img.style.maxWidth = '100%';
+            img.style.objectFit = 'contain';
+            img.style.display = 'block';
+            img.style.margin = '0 auto';
+          }
+        });
+        if(maxW>0){
+          const capped = Math.min(Math.max(Math.round(maxW), 180), 320); // clamp 180–320px
+          document.documentElement.style.setProperty('--right-col-w', capped + 'px');
+        }
+      }
+      function onReady(){
+        const feat = document.querySelector('.feature-img');
+        if(feat){
+          if(feat.complete) computeSideDims();
+          else feat.addEventListener('load', computeSideDims, {once:true});
+        }
+        const sideImgs = document.querySelectorAll('.right .card img');
+        sideImgs.forEach(img => {
+          if(img.complete) computeSideDims();
+          else img.addEventListener('load', computeSideDims);
+        });
+        window.addEventListener('resize', computeSideDims);
+      }
+      document.addEventListener('DOMContentLoaded', onReady);
+    })();
+  </script>
 </body>
 </html>
