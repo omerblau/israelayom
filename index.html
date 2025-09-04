@@ -11,7 +11,9 @@
     *{box-sizing:border-box}
     body{margin:0;font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;color:var(--ink);background:var(--bg)}
     a{color:inherit;text-decoration:none}
-    .container{max-width:1180px;margin:0 auto;padding:0 16px}
+    /* Widen page and reduce side gutters so side columns sit near edges */
+    .container{max-width:1360px;margin:0 auto;padding:0 12px}
+
     /* Top utility bar */
     .topbar{border-bottom:1px solid var(--line);font-size:14px}
     .topbar .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:8px 0}
@@ -28,26 +30,29 @@
     .logo-img{max-width:520px;height:auto}
     .logo small{display:block;text-align:center;margin-top:4px;color:var(--muted)}
 
-    /* Login mini form (now in masthead) */
+    /* Login mini form (in masthead) */
     .login-box{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
     .login-box input{padding:6px 8px;border:1px solid var(--line);border-radius:4px;min-width:150px}
     .login-box button{padding:6px 10px;background:var(--ink);color:#fff;border:0;border-radius:4px;cursor:pointer}
 
-    /* Nav */
+    /* Nav – center row but stretch tabs across full width between left rail & right images */
     nav{border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:5}
-    .nav{position:relative;display:flex;justify-content:center;align-items:center;padding:12px 0}
-    .tabs{display:flex;gap:28px;align-items:center}
-    .tabs a{font-weight:600}
-    .nav .search{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-weight:700}
+    .nav{display:flex;align-items:center;gap:16px;padding:12px 0}
+    .tabs{display:flex;flex:1;justify-content:space-between;align-items:center}
+    .tabs a{font-weight:600;white-space:nowrap}
+    .nav .search{margin-left:16px;font-weight:700}
 
-    /* Main grid */
-    .grid{display:grid;grid-template-columns:280px 1fr 320px;gap:24px;margin-top:22px}
+    /* Main grid – make right column ≈ quarter of the center column */
+    .grid{display:grid;grid-template-columns:300px 1fr 205px;gap:28px;margin-top:22px}
+
     /* Left rail */
     .rail article{padding:14px 0;border-bottom:1px solid var(--line)}
     .tag{display:inline-block;background:#f2f2f2;color:#333;font-size:11px;font-weight:800;padding:4px 6px;border-radius:4px;margin-bottom:6px}
     .rail h4{margin:6px 0 6px;font-size:16px}
     .by{font-size:12px;color:var(--muted)}
+
     /* Feature */
+    .feature{ text-align:center; }
     .feature figure{margin:0}
     .feature img{width:100%;height:auto;border-radius:4px}
     .kicker{display:inline-block;background:#efeded;border:1px solid var(--line);font-size:11px;padding:4px 8px;border-radius:20px;margin:8px 0 0;color:#333}
@@ -56,18 +61,21 @@
     .excerpt{margin:8px 0 14px;color:#333}
     .btn{display:inline-block;background:var(--ink);color:#fff;padding:10px 14px;border-radius:6px;font-weight:700}
     .btn.outline{background:#fff;color:var(--ink);border:1px solid var(--ink)}
-    /* Right rail */
-    .card{display:block;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:16px}
+
+    /* Right rail – smaller cards */
+    .card{display:block;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:14px}
     .card img{width:100%;height:auto;border-radius:4px}
-    .card h5{margin:8px 0 6px;font-size:16px}
+    .card h5{margin:8px 0 6px;font-size:15px}
+
     /* Footer-ish spacing */
     .sp{height:40px}
+
     /* Responsive */
     @media (max-width:1100px){
       .grid{grid-template-columns:1fr}
       .rail{order:2}
       .right{order:3}
-      .nav .search{right:10px}
+      .tabs{gap:18px;justify-content:center;flex-wrap:wrap}
     }
   </style>
 </head>
